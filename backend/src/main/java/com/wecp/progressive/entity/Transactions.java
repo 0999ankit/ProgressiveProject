@@ -1,69 +1,69 @@
 package com.wecp.progressive.entity;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-//@Entity
+@Entity
 public class Transactions {
 
-    //@Id
-    //@GeneratedValue(strategy=GenerationType.IDENTITY)
-    //@Column(name="transaction_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int transactionId;
-
-    //@Column(name="account_id",nullable = false)
-    private int accountId;
-
-   // @Column(name = "amount",nullable = false)
-    private Double amount;
-
-    //@Column(name = "transactionDate",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Accounts accounts;
+    private double amount;
+    private String transactionType;
     private Date transactionDate;
 
-    //@Column(name="transactionType",nullable = false)
-    private String transactionType;
+    public Transactions() {
+        //
+    }
+
+    public Transactions(int transactionId, int accountId, double amount, Date timestamp, String transactionType) {
+        this.transactionId = transactionId;
+        this.accounts.setAccountId(accountId);
+        this.amount = amount;
+        this.transactionDate = timestamp;
+        this.transactionType = transactionType;
+    }
+
+    // Getters and setters
     public int getTransactionId() {
         return transactionId;
     }
+
     public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
-    public int getAccountId() {
-        return accountId;
-    }
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
-    public Double getAmount() {
+
+    public double getAmount() {
         return amount;
     }
-    public void setAmount(Double amount) {
+
+    public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public Accounts getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Accounts accounts) {
+        this.accounts = accounts;
+    }
+
     public Date getTransactionDate() {
         return transactionDate;
     }
+
     public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
+    
     public String getTransactionType() {
         return transactionType;
     }
+
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
-    public Transactions(int transactionId, int accountId, Double amount, Date transactionDate, String transactionType) {
-        this.transactionId = transactionId;
-        this.accountId = accountId;
-        this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.transactionType = transactionType;
-    }
-
-    
-
 }
